@@ -1,8 +1,11 @@
 {
   "name": "docx-templating",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "main": "dist/index.js",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "url": "https://github.com/bfo2ses/docx-templating.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "yarn build:prepare && tsc",
@@ -10,6 +13,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^8.1.0",
+    "@types/he": "^1.1.1",
     "@types/jest": "^25.2.1",
     "@types/jszip": "^3.1.7",
     "@types/lodash": "^4.14.149",
@@ -21,7 +25,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "fast-xml-parser": "^3.16.0",
     "fs-extra": "^9.0.0",
     "he": "^1.2.0",
     "jszip": "^3.3.0",
