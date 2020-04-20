@@ -1,10 +1,29 @@
 
-export class Medias implements DOCXTemplating.IMedias {
-    #links: DOCXTemplating.Link[] = []
+import { IMedias, Link } from './types'
+
+export class Medias implements IMedias {
+    static instance: Medias | null
+    #links: Link[]
+
+    private constructor() {
+        this.#links = []
+    }
+
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Medias()
+        }
+        return this.instance
+    }
+
+    static reset() {
+        this.instance = null
+    }
+
     hasLinks(): boolean {
         return this.#links.length > 0
     }
-    get links() {
+    getLinks() {
         return this.#links
     }
 

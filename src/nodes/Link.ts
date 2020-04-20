@@ -1,8 +1,10 @@
-import _ from 'lodash'
+import he from 'he'
+import { INode, Context } from '../types'
+import { Data } from '../utils/Data'
 
-export class LinkNode implements DOCXTemplating.INode {
-    parent: DOCXTemplating.INode
-    children: DOCXTemplating.INode[]
+export class LinkNode implements INode {
+    parent: INode
+    children: INode[]
     ignore: boolean = false
     parameter: string
 
@@ -12,8 +14,8 @@ export class LinkNode implements DOCXTemplating.INode {
         this.children = []
     }
 
-    render(context: DOCXTemplating.Context): string {
-        const param = _.get(context.data, this.parameter)
-        return `<w:hyperlink r:id="${context.medias.getLinkId(param.url)}"><w:r><w:t>${param.text || param.url}</w:t></w:r></w:hyperlink>`
+    render(context: Context): string {
+        const param = Data.getValue(this.parameter, context.data)
+        return he.escape(param.text || param.url)
     }
 }

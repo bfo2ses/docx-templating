@@ -1,4 +1,4 @@
-import JSZip from "jszip"
+import JSZip, { JSZipObject } from "jszip"
 import { readFile } from "fs-extra"
 
 export class Files {
@@ -15,21 +15,19 @@ export class Files {
         return this.#zip.filter((path) => /word\/(document|footer([0-9]*)|header([0-9]*))+.xml/.test(path))
     }
 
-    async getFile(filePath: string) {
+    async getXMLForSubTemplate() {
+        return this.readFile('word/document.xml')
+    }
+
+    async readFile(filePath: string): Promise<string> {
         return this.#zip.file(filePath).async('text')
     }
 
-    setTextFile(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream) {
-        this.setFile(filePath, data)
-    }
-    setBinaryFile(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream) {
-        this.setFile(filePath, data, { binary: true })
-    }
-    setBase64File(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream) {
-        this.setFile(filePath, data, { base64: true })
+    writeTextFile(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream) {
+        this.writeFile(filePath, data)
     }
 
-    save(): Promise<Uint8Array> {
+    async save(): Promise<Uint8Array> {
         return this.#zip.generateAsync({
             type: 'uint8array',
             compression: 'DEFLATE',
@@ -37,7 +35,7 @@ export class Files {
         })
     }
 
-    private setFile(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream, options?: JSZip.JSZipFileOptions): void {
+    private writeFile(filePath: string, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream, options?: JSZip.JSZipFileOptions): void {
         this.#zip.file(filePath, data, options)
     }
 }

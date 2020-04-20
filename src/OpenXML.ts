@@ -1,26 +1,25 @@
 import sax from 'sax'
 import _ from 'lodash'
-import { ForNode, LinkNode, RootNode, TextNode, ParameterNode, TagNode } from './nodes'
-import { Command } from './Command'
+import { RootNode, TextNode, TagNode, SubTemplateRootNode } from './nodes'
 import { PartialCommand } from './PartialCommand'
 import { Text } from './Text'
-import { Loop } from './Loop'
-// import { Medias } from './Word'
-
-export enum Tags {
-    DOCUMENT = 'w:document',
-    BODY = 'w:body',
-    TABLE = 'w:tbl',
-    TABLE_ROW = 'w:tr',
-    TABLE_CELL = 'w:tc',
-    TEXT = 'w:t',
-    TEXT_CONTAINER = 'w:r',
-    PARAGRAPH = 'w:p'
-}
+import { IRootNode } from './types'
+import { Tags } from './enums'
+import { Node } from './Node'
+import { Medias } from './Medias'
 
 export class OpenXML {
 
-    static async parse(xml: string): Promise<DOCXTemplating.IRootNode> {
+    static async parseForSubTemplate(template: string) {
+        const node = await this.parse(template)
+        const root = new SubTemplateRootNode()
+        const allowedTags = [Tags.PARAGRAPH, Tags.TABLE]
+        root.children = node.children.filter(c => c.tag === Tags.DOCUMENT)[0].children.filter(c => c.tag === Tags.BODY)[0].children.filter(child => child instanceof TagNode ? allowedTags.indexOf(child.tag as Tags) >= 0 : true)
+        return root
+    }
+
+    static async parse(xml: string): Promise<IRootNode> {
+        Node.reset()
         const file = xml
 
         const parser = sax.parser(true, {
@@ -28,14 +27,13 @@ export class OpenXML {
             normalize: false
         })
 
-        Loop.init()
         const rootNode = new RootNode()
-        let currentNode: DOCXTemplating.INode = rootNode
+        Node.getInstance().setCurrent(rootNode)
 
         return new Promise(async (resolve, reject) => {
             parser.onopentag = (tag) => {
                 const node = new TagNode({
-                    parent: currentNode,
+                    parent: Node.getInstance().getCurrent(),
                     tag: tag.name,
                     attributes: tag.attributes,
                 })
@@ -44,74 +42,26 @@ export class OpenXML {
                     PartialCommand.init(node)
                 }
 
-                currentNode.children.push(
-                    node
-                )
-                currentNode = node
-                Loop.node = node
+                Node.getInstance().addChild(node)
+                Node.getInstance().setCurrent(node)
             }
-            parser.onclosetag = () => {
-                if (PartialCommand.node === currentNode) {
-                    if (PartialCommand.isCommand()) {
-                        PartialCommand.node.children.forEach(n => {
-                            n.ignore = true
-                        })
-                        const tr = new TagNode({
-                            parent: PartialCommand.node,
-                            attributes: {},
-                            tag: Tags.TEXT_CONTAINER
-                        })
-                        const text = new TagNode({
-                            parent: tr,
-                            attributes: {},
-                            tag: Tags.TEXT
-                        })
-                        tr.children.push(text)
-                        PartialCommand.node.children.push(tr)
-                        Command.process(PartialCommand.text, text)
-                    }
-                    PartialCommand.init(currentNode)
-                }
-                if (Loop.current) {
-                    if (Loop.hasFinished) {
-                        if (Loop.node?.parent === Loop.current) {
-                            currentNode = Loop.current.parent
-                            Loop.init(Loop.current.parentLoop)
-                        } else {
-                            Loop.node = Loop.node?.parent
-                            if (currentNode.parent) currentNode = currentNode.parent
-                        }
-                    } else {
-                        if (currentNode.parent === Loop.current.parent) {
-                            currentNode = Loop.current
-                        } else if (currentNode.parent) {
-                            currentNode = currentNode.parent
-                        }
-                    }
+            parser.onclosetag = (tag) => {
+                if (Tags.PARAGRAPH === tag) {
+                    PartialCommand.process()
                 } else {
-                    if (currentNode.parent) {
-                        if (currentNode.parent instanceof ForNode) {
-                            currentNode = currentNode.parent.parent
-                        } else {
-                            currentNode = currentNode.parent
-                        }
-                    }
+                    if (Node.getInstance().getCurrent() instanceof TagNode) PartialCommand.add(Text.current, Node.getInstance().getCurrent() as TagNode)
+                    if (Node.getInstance().getCurrent().tag !== Tags.TEXT) Text.current = ''
                 }
+                Node.getInstance().setParentAsCurrent()
             }
             parser.ontext = text => {
-                if (PartialCommand.node) {
-                    PartialCommand.addText(text)
-                }
-                if (Text.isCommand(text)) {
-                    Command.process(text, currentNode)
-                } else {
-                    currentNode.children.push(
-                        new TextNode({
-                            parent: currentNode,
-                            text
-                        })
-                    )
-                }
+                Text.current += text
+                Node.getInstance().addChild(
+                    new TextNode({
+                        parent: Node.getInstance().getCurrent(),
+                        text
+                    })
+                )
             }
             parser.onend = () => {
                 resolve(rootNode)

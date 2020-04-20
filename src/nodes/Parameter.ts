@@ -1,9 +1,10 @@
-import _ from 'lodash'
+import { INode, Context } from '../types'
+import { Data } from '../utils/Data'
 
-export class ParameterNode implements DOCXTemplating.INode {
-    parent: DOCXTemplating.INode
+export class ParameterNode implements INode {
+    parent: INode
     ignore: boolean = false
-    children: DOCXTemplating.INode[]
+    children: INode[]
     parameter: string
 
     constructor({ parent, parameter }: Pick<ParameterNode, 'parent' | 'parameter'>) {
@@ -12,7 +13,7 @@ export class ParameterNode implements DOCXTemplating.INode {
         this.children = []
     }
 
-    render(context: DOCXTemplating.Context): string {
-        return _.get(context.data, this.parameter)
+    render(context: Context): string {
+        return Data.getValue(this.parameter, context.data)
     }
 }

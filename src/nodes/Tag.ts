@@ -1,10 +1,13 @@
+import he from "he"
+import { INode, Context, ITagNode } from "../types"
+import { Tags } from "../enums"
 
-export class TagNode implements DOCXTemplating.INode {
-    parent: DOCXTemplating.INode
-    tag: string | null
+export class TagNode implements ITagNode {
+    parent: INode
+    tag: string | Tags
     attributes: any
     ignore: boolean = false
-    children: DOCXTemplating.INode[]
+    children: INode[]
 
     constructor({ parent, tag, attributes }: Pick<TagNode, 'parent' | 'attributes' | 'tag'>) {
         this.parent = parent
@@ -13,7 +16,7 @@ export class TagNode implements DOCXTemplating.INode {
         this.children = []
     }
 
-    render(context: DOCXTemplating.Context): string {
+    render(context: Context): string {
         let string = ''
         if (this.ignore) return string
 
@@ -31,7 +34,7 @@ export class TagNode implements DOCXTemplating.INode {
     }
 
     createTag(content: string) {
-        const attributes = Object.keys(this.attributes).reduce((str, key) => str += ` ${key}="${this.attributes[key]}"`, '')
+        const attributes = Object.keys(this.attributes).reduce((str, key) => str += ` ${key}="${he.escape(this.attributes[key])}"`, '')
         if (content) {
             return `<${this.tag}${attributes}>${content}</${this.tag}>`
         } else {

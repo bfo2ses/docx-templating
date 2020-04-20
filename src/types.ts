@@ -1,52 +1,63 @@
-namespace DOCXTemplating {
+import { Tags } from "./enums"
 
-    export type Options = {
-        tagParameter: { start: string, end: string }
-        tagLoop: { start: string, end: string }
-        tagImage: { start: string, end: string }
-        tagLink: { start: string, end: string }
+export type Options = {
+    numberFormat?: {
+
     }
+    path: string
+}
 
-    export interface INode {
-        parent?: DOCXTemplating.INode
-        children: DOCXTemplating.INode[]
-        ignore: boolean
-        render(context: Context): string
-    }
+export interface INode {
+    parent: INode
+    tag?: string | Tags
+    children: INode[]
+    ignore: boolean
+    render(context: Context): string
+}
 
-    export interface IRootNode extends DOCXTemplating.INode {
-        children: DOCXTemplating.INode[]
-    }
+export interface ITagNode extends INode {
+    parent: INode
+    tag: string | Tags
+    children: INode[]
+}
 
-    export interface ILinkNode extends DOCXTemplating.INode {
-        id: string
-        url: string
+export interface IBlockNode extends INode {
+    parent: INode
+    parentBlock: IBlockNode | null
+}
 
-        render(): string
-    }
+export interface IRootNode extends INode {
+    parent: INode
+}
 
-    export interface WordNode extends DOCXTemplating.INode {
-        tag: string | null
-        attributes: any
+export interface ILinkNode extends INode {
+    id: string
+    url: string
 
-        createTag(content: string): string
-    }
+    render(): string
+}
 
-    export interface ITextNode extends DOCXTemplating.INode {
-        text: string
-    }
+export interface ITextNode extends INode {
+    text: string
+}
 
-    export type Context = {
-        data: any
-        medias: DOCXTemplating.IMedias
-    }
+export type Context = {
+    locale?: string,
+    data: any
+}
 
-    export interface IMedias {
-        getLinkId(url: string): string
-    }
+export interface ICommand {
+    is(text: string): boolean
+    process(text: string, node: INode): string
+}
 
-    export type Link = {
-        id: string
-        url: string
-    }
+export interface IMedias {
+    getLinkId(url: string): string
+    hasLinks(): boolean
+    getLinks(): Link[]
+}
+
+export type Link = {
+    id: string
+    url: string
 }

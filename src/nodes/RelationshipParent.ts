@@ -1,6 +1,8 @@
 import { RelationshipNode } from "./Relationship"
+import { INode } from '../types'
 
-export class RelationshipsNode implements DOCXTemplating.INode {
+export class RelationshipsNode implements INode {
+    parent: INode
     children: RelationshipNode[] = []
     ignore: boolean = false
 

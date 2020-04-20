@@ -1,11 +1,12 @@
-export class RelationshipNode implements DOCXTemplating.INode {
+import { INode, Context, Link } from '../types'
+export class RelationshipNode implements INode {
     id: string
     url: string
     children: any = null
     ignore: boolean = false
-    parent: DOCXTemplating.INode
+    parent: INode
 
-    constructor(link: DOCXTemplating.Link) {
+    constructor(link: Link) {
         this.id = link.id
         this.url = link.url
     }

@@ -1,6 +1,9 @@
-export class TextNode implements DOCXTemplating.ITextNode {
-    parent: DOCXTemplating.INode
-    children: DOCXTemplating.INode[]
+import he from 'he'
+import { INode, ITextNode } from '../types'
+
+export class TextNode implements ITextNode {
+    parent: INode
+    children: INode[]
     text: string
     ignore: boolean = false
 
@@ -11,6 +14,6 @@ export class TextNode implements DOCXTemplating.ITextNode {
     }
 
     render(): string {
-        return this.text
+        return he.escape(this.text)
     }
 }
