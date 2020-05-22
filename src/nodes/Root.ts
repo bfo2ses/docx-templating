@@ -1,3 +1,4 @@
+import he from 'he'
 import { INode, IRootNode } from '../types'
 export class RootNode implements IRootNode {
     parent: INode

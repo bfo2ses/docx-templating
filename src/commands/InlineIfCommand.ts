@@ -1,8 +1,8 @@
 import { ICommand, INode } from "../types"
-import { TextNode, ParameterNode, IfNode } from "../nodes"
+import { TextNode, ParameterNode, IfNode, InlineIfNode } from "../nodes"
 
 export class InlineIfCommand implements ICommand {
-    private readonly REGEXP = /([^{=}]*){IF=\(([a-zA-Z0-9\.&!=><|"'\s]+)\)}([^{=}]*){\/IF}([^{=}]*)/g
+    private readonly REGEXP = /([^{=}]*){IF=\(([^{},]+)(?:\s*,=\s*)?([^}]*?)(?:\s*,!\s*([^},]*))?\)}(.*)/g
     static instance: InlineIfCommand
 
     static getInstance() {
@@ -20,18 +20,20 @@ export class InlineIfCommand implements ICommand {
         const regex = new RegExp(this.REGEXP)
         const result = regex.exec(text)
         if (result) {
-            node.children.push(
-                new TextNode({ parent: node, text: result[1] })
-            )
-            const ifNode = new IfNode({
+            if (result[1].length > 0) {
+                node.children.push(
+                    new TextNode({ parent: node, text: result[1] })
+                )
+            }
+            const ifNode = new InlineIfNode({
                 parent: node,
-                parameter: result[2]
+                parameter: result[2],
+                trueValue: result[3],
+                falseValue: result[4]
             })
-            ifNode.children.push(
-                new TextNode({ parent: node, text: result[3] })
-            )
+
             node.children.push(ifNode)
-            return result[4]
+            return result[5]
         }
         return ''
     }

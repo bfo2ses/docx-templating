@@ -1,6 +1,7 @@
 export * from './Date'
 export * from './For'
 export * from './If'
+export * from './InlineIf'
 export * from './Link'
 export * from './LinkWrapper'
 export * from './Number'

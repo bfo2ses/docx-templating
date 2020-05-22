@@ -3,7 +3,7 @@ import { IfNode } from "../nodes"
 import { Node } from "../Node"
 
 export class IfCommand implements ICommand {
-    private readonly REGEXP = /^{IF=\(([a-zA-Z0-9\.&'"!=><|\s]+)\)}$/g
+    private readonly REGEXP = /^{IF=([^,}]+)}$/g
     static instance: IfCommand
 
     static getInstance() {

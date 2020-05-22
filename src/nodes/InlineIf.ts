@@ -1,24 +1,29 @@
+import he from 'he'
 import { INode, Context } from '../types'
 import { Data } from '../utils/Data'
 
-export class IfNode implements INode {
+export class InlineIfNode implements INode {
     parent: INode
     children: INode[]
     parameter: string
+    trueValue: string
+    falseValue: string
     ignore: boolean = false
 
-    constructor({ parent, parameter }: Pick<IfNode, 'parent' | 'parameter'>) {
+    constructor({ parent, parameter, trueValue, falseValue }: Pick<InlineIfNode, 'parent' | 'parameter' | 'trueValue' | 'falseValue'>) {
         this.parent = parent
         this.parameter = parameter
+        this.trueValue = trueValue
+        this.falseValue = falseValue
         this.children = []
     }
 
     render(context: Context): string {
         const bool = Data.getValue(this.parameter, context.data)
         if (bool) {
-            return this.children.map(child => child.render(context)).join('')
+            return he.escape(this.trueValue)
         } else {
-            return ''
+            return he.escape(this.falseValue || '')
         }
 
     }

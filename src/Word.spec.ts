@@ -73,15 +73,19 @@ describe('Word', () => {
 
     it('locale fr, 1 link', async () => {
         const data = { plop: 'plop' }
-        const template = Word
+        parseMock.mockImplementation(async() => {
+            Medias.getInstance().getLinkId('toto')
+            return {
+                render: renderMock
+            }
+        })
+        const result = await Word
             .fromTemplate('toto', {
                 path: 'path'
             })
             .setLocale('fr')
             .setData(data)
-
-        Medias.getInstance().getLinkId('toto')
-        const result = await template.generate()
+            .generate()
 
         expect(fromMock).toBeCalledWith('pathtoto')
         expect(readMock).toBeCalledWith('document.xml')

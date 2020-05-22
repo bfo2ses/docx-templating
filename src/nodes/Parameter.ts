@@ -1,5 +1,6 @@
 import { INode, Context } from '../types'
 import { Data } from '../utils/Data'
+import he from 'he'
 
 export class ParameterNode implements INode {
     parent: INode
@@ -14,6 +15,7 @@ export class ParameterNode implements INode {
     }
 
     render(context: Context): string {
-        return Data.getValue(this.parameter, context.data)
+        const val = Data.getValue(this.parameter, context.data)
+        return he.escape(val.toString())
     }
 }

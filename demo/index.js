@@ -116,8 +116,8 @@ const data = {
         initiales: 'JM'
     },
     anciensInvestissements: [
-        { millesime: '2018', quantite: 112 },
-        { millesime: '2017', quantite: 78 }
+        // { millesime: '2018', quantite: 112 },
+        // { millesime: '2017', quantite: 78 }
     ],
     nouveauxInvestissements: { millesime: '2019', quantite: 70 },
     utilisateur: {
@@ -209,10 +209,10 @@ const data = {
     client: {
         id_client: 12435,
         idRib: 2706,
-        nom: 'SLICA, INC.',
+        nom: 'SLICA, INC. & Test',
         idCommercial: 228,
         langueDesDocuments: 'en',
-        nomCommercial: 'ALEKSANDER WINES',
+        nomCommercial: 'ALEKSANDER WINES & toto',
         nomDeRue: '5885 Vista Del Paso',
         complementNomDeRue: '',
         codePostal: '93446',
@@ -238,6 +238,42 @@ const data = {
             text: 'Balance sheet-0.pdf'
         },
         {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
+            url: 'http://localhost:8181/documents/?c=e1a5e33b7fb33e7a30daf1297faad393:ec9034d863f7bbf0615c97ee04822beea102f4e7300bf878095a7cb90d6a0dd0d045c4f04aa310fd017645582ba3ea8b5b52d066f80681f4841e1bdc381d34e8a69ff42c6fbd0be62c978f0281a27648566a24265750347abfc43fc5267559e7',
+            text: 'Balance sheet-0.pdf'
+        },
+        {
             url: 'http://localhost:8181/documents/?c=2d9d2baa94b208f24de99f33d1479a2b:6bc21f4641c525e7256f0647d7b7573dfd6ab75db41ca670cbf21bd831c725434fb51b13160e2453350407dc490aeac6849d207a8aeb5f213b23b2e4fad5c27084dc1207f6927d6e4aa7cb966e824548ccc0c313f7263a0eea69cdc061059416',
             text: 'Financing request-0.pdf'
         }
@@ -248,6 +284,7 @@ const test = async (file) => {
         .fromTemplate(`${file}.docx`, {
             path: path.dirname(__filename) + '/'
         })
+        .setLocale('fr')
         .setData(data)
         .generate()
     await fs.writeFile(path.dirname(__filename) + `/result-${file}.docx`, word)
