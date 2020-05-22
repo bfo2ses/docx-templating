@@ -1,6 +1,6 @@
 {
   "name": "docx-templating",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "main": "dist/index.js",
   "license": "GPL-3.0-or-later",
   "repository": {
@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "yarn build:prepare && tsc",
-    "build:prepare": "rm -rf ./dist"
+    "prebuild": "rm -rf ./dist",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.1.0",
