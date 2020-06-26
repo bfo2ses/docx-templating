@@ -19,7 +19,9 @@ export class DateNode implements INode {
     }
 
     render(context: Context): string {
-        const date = this.parameter !== 'now' ? dayjs(Data.getValue(this.parameter, context.data)) : dayjs()
+        const data = this.parameter !== 'now' ? Data.getValue(this.parameter, context.data) : new Date()
+        if(!data) return ''
+        const date = dayjs(data)
         return date.locale(DateUtils.getInstance().getLocale(context.locale) || 'en').format(this.format)
     }
 }

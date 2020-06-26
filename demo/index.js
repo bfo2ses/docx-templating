@@ -287,7 +287,7 @@ const test = async (file) => {
         .setLocale('fr')
         .setData(data)
         .generate()
-    await fs.writeFile(path.dirname(__filename) + `/result-${file}.docx`, word)
+    await fs.writeFile(path.dirname(__filename) + `/${file}-result.docx`, word)
 }
 
-test('simple')
+test('service-contract/FRANCE/service-contract-GOLD')

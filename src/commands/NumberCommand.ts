@@ -2,7 +2,7 @@ import { ICommand, INode } from "../types"
 import { NumberNode, TextNode } from "../nodes"
 
 export class NumberCommand implements ICommand {
-    private readonly REGEXP = /^([^{=}]*){N=\(([^,\[\]]+)[\s,]*([0-9]*)[\s,]*(\$|€|%)?\)}(.*)$/g
+    private readonly REGEXP = /^([^{=}]*){N=\(([^,]+)[\s,]*([0-9]*)[\s,]*(\$|€|%)?\)}(.*)$/g
     static instance: NumberCommand
 
     static getInstance() {

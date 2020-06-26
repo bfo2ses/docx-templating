@@ -1,9 +1,8 @@
 import { ICommand, INode } from "../types"
-import { IfNode, TextNode, DateNode } from "../nodes"
-import { Block } from "../Block"
+import { TextNode, DateNode } from "../nodes"
 
 export class DateCommand implements ICommand {
-    private readonly REGEXP = /([^{=}]*){D=\(([^{=},]*)[\s]*,[\s]*(.+)\)}([^{=}]*)/g
+    private readonly REGEXP = /([^{=}]*){D=\(([^(),]*)[\s]?,[\s]?([^()]*)\)}(.*)/g
     static instance: DateCommand
 
     static getInstance() {

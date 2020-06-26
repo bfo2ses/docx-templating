@@ -55,13 +55,13 @@ export class OpenXML {
                 Node.getInstance().setParentAsCurrent()
             }
             parser.ontext = text => {
-                Text.current += text
                 Node.getInstance().addChild(
                     new TextNode({
                         parent: Node.getInstance().getCurrent(),
                         text
                     })
                 )
+                Text.current += text
             }
             parser.onend = () => {
                 resolve(rootNode)

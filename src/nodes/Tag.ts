@@ -2,6 +2,8 @@ import he from "he"
 import { INode, Context, ITagNode } from "../types"
 import { Tags } from "../enums"
 
+const skippingTags = [Tags.PROOF, Tags.BOOKMARK_END, Tags.BOOKMARK_START]
+
 export class TagNode implements ITagNode {
     parent: INode
     tag: string | Tags
@@ -14,6 +16,7 @@ export class TagNode implements ITagNode {
         this.tag = tag
         this.attributes = attributes
         this.children = []
+        this.ignore = skippingTags.indexOf(tag as Tags) >= 0
     }
 
     render(context: Context): string {
