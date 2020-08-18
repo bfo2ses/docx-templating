@@ -41,10 +41,9 @@ export class NumberNode implements INode {
                     options = {
                         style: 'currency',
                         currency: this.currency,
-                        minimumFractionDigits: 0
+                        minimumFractionDigits: !!this.currency ? this.decimal : 0
                     }
                 } else {
-                    number /= 100
                     options = {
                         style: 'percent',
                         minimumFractionDigits: this.decimal
