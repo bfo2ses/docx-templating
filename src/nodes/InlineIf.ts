@@ -21,9 +21,9 @@ export class InlineIfNode implements INode {
     render(context: Context): string {
         const bool = Data.getValue(this.parameter, context.data)
         if (bool) {
-            return he.escape(this.trueValue)
+            return Data.getValue(this.trueValue, context.data, this.trueValue)
         } else {
-            return he.escape(this.falseValue || '')
+            return Data.getValue(this.falseValue, context.data, this.falseValue)
         }
 
     }
