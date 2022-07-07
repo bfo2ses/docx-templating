@@ -1,0 +1,38 @@
+{
+  "name": "docx-templating",
+  "version": "1.0.0-alpha.15",
+  "main": "dist/index.js",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "url": "https://github.com/bfo2ses/docx-templating.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "prebuild": "rm -rf ./dist",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/he": "^1.1.1",
+    "@types/jest": "^25.2.1",
+    "@types/jszip": "^3.1.7",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^13.11.1",
+    "@types/sax": "^1.2.1",
+    "@types/sinon": "^9.0.0",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3",
+    "sinon": "^9.0.2",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "dayjs": "^1.8.24",
+    "fs-extra": "^9.0.0",
+    "he": "^1.2.0",
+    "jszip": "^3.3.0",
+    "lodash": "^4.17.15",
+    "sax": "^1.2.4",
+    "vm2": "^3.9.1"
+  }
+}
