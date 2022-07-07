@@ -83,14 +83,14 @@ const data = {
         },
         refinanceur: {
             id: 166,
-            nom: 'Bank of the West',
+            nom: 'Bank of the Beast',
             etat: 'actif',
             filiales: '["USA"]'
         }
     },
     opportunite: {
         id: 'be141de9-253f-4d6a-9659-763e9c5664c1',
-        nom: 'RENEWAL SLICA 2019',
+        nom: 'RENEWAL SLOCA 2016',
         type: 'annule_remplace',
         offre: 'barriques',
         millesime: 2019,
@@ -110,9 +110,9 @@ const data = {
         client: { nom: 'SLICA, INC.' },
     },
     commercial: {
-        nomCompletAbrege: 'Jul. Met.',
-        nom: 'Mette',
-        prenom: 'Julie',
+        nomCompletAbrege: 'Jul. Mit.',
+        nom: 'Mitte',
+        prenom: 'Julienne',
         initiales: 'JM'
     },
     anciensInvestissements: [
@@ -122,10 +122,10 @@ const data = {
     nouveauxInvestissements: { millesime: '2019', quantite: 70 },
     utilisateur: {
         id: '155',
-        prenom: 'Carmelo',
-        nom: 'Santed',
-        nomComplet: 'Carmelo Santed',
-        email: 'carmelo.santed@harenting.es'
+        prenom: 'Carmelito',
+        nom: 'Santa',
+        nomComplet: 'Carmelito Santa',
+        email: 'carmelito.santa@test.fr'
     },
     refinanceur: {
         id: 166,
@@ -135,12 +135,12 @@ const data = {
         idRefinanceur: 166,
         contactRefinanceur: {
             id: '4d3321e1-a300-492c-86aa-882efb515910',
-            nom: 'de Koning',
-            prenom: 'Craig',
-            email: 'Craig.DeKoning@bankofthewest.com',
-            cc: 'Jared.Christensen@financial-svcs.com; jeff.elardo@ha-barrelmanagement.com; nathalie.hebrard@ha-barrelmanagement.com'
+            nom: 'de Knwon',
+            prenom: 'Chris',
+            email: 'Chris.DeKKnwon@bankofthebeast.com',
+            cc: 'test@test.fr'
         },
-        contact: { nomComplet: 'Craig de Koning' }
+        contact: { nomComplet: 'Chris de Knwon' }
     },
     contrat: {
         periodicite: 'mensuelle',
@@ -209,11 +209,11 @@ const data = {
     client: {
         id_client: 12435,
         idRib: 2706,
-        nom: 'SLICA, INC. & Test',
+        nom: 'SLOCA, INC. & Test',
         idCommercial: 228,
         langueDesDocuments: 'en',
-        nomCommercial: 'ALEKSANDER WINES & toto',
-        nomDeRue: '5885 Vista Del Paso',
+        nomCommercial: 'KING WINES & toto',
+        nomDeRue: '5885 Vista Del Pais',
         complementNomDeRue: '',
         codePostal: '93446',
         ville: 'Paso Robles',
